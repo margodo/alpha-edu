@@ -1,5 +1,12 @@
 from lion import Lion
+from exhibit import Exhibit
+from penguin import Penguin
 
-lion1 = Lion('Rick',5,True)
+exhibit1 = Exhibit('Happy Zoo','London')
 
-lion1.make_sound()
+lion = Lion('Rick',age=5)
+penguin = Penguin('Carl',age=2)
+
+exhibit1.add_animal(lion)
+exhibit1.add_animal(penguin)
+exhibit1.show_all_animal()
