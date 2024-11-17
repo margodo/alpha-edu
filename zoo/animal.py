@@ -1,16 +1,25 @@
 class Animal:
 
-    def __init__(self, name,species, age):
+    def __init__(self, name, species, age, is_endangered:bool):
         self.name = name
         self.species = species
         self.age = age
-        self.is_endangered = False
+        self.is_endangered = is_endangered
+        # self.__password = 'admin@admin'
 
-    def make_sound(sound):
-        print(sound)
+    def make_sound(self):
+        pass
 
-    def eat_food(food):
-        print(f'Feed me with {food}')
+    def eat_food(self):
+        pass
     
-    def sleep(hrs):
-        print(f'I sleep for {hrs} hours')
+    def sleep(self):
+        pass
+
+    def get_species(self):
+        print(f'{self.name} is {self.species}')
+
+    def display_info(self):
+        print(f'{self.name} is {self.species}.\n{self.name} is {self.age} yo.')
+        if self.is_endangered == True:
+            print(f'{self.species} is endangered')
