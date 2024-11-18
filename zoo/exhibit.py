@@ -16,5 +16,8 @@ class Exhibit:
 
     def show_all_animal(self):
         for animal in self.animal_list:
-            print(f'In this exhibit lives {animal.name} - {animal.species}')
+            print(f'In exhibit {self.name} lives {animal.name} - {animal.species}')
         return self.animal_list
+    
+    def exhibit_info(self):
+        print(f'Our zoo is located in {self.location}. This is exhibit {self.name}')
