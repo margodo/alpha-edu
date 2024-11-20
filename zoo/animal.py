@@ -11,10 +11,10 @@ class Animal:
         pass
 
     def eat_food(self):
-        pass
+        print(f'{self.species}  {self.name} is eating now.')
     
     def sleep(self):
-        pass
+        print(f'{self.species} {self.name} is sleeping now.')
 
     def get_species(self):
         print(f'{self.name} is {self.species}')
