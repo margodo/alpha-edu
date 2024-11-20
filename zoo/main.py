@@ -7,8 +7,6 @@ from zookeeper import Zookeeper
 from vet import Vet
 from zoo import Zooo
 
-
-
 # Creating animals
 
 lion_ricky = Lion('Ricky',6)
@@ -130,19 +128,16 @@ while True:
             chosen_exhibit = input('Type the name of the exhibit ')
             for exhibit in happy_zoo.list_exhibits:
                 if chosen_exhibit == exhibit.name:
-                    chosen_animal = input('Please provide the name of tre animal ')
+                    chosen_animal = input('Please provide the name of the animal ')
                     for exhibit_inner in happy_zoo.list_exhibits:
                         for animal in exhibit_inner.animal_list:
                             if chosen_animal == animal.name:
                                 exhibit.add_animal(animal)
                                 exhibit_inner.remove_animal(animal)
                                 print(f'{animal.name} is removed from {exhibit_inner.name}\n{animal.name} is added from {exhibit.name}')
-                            else:
-                                print('Such animal was not found')
-                else:
-                    print('Exhibit not found')
+                                continue
         elif user_operation == 'remove':
-            chosen_animal = input('Please provide the name of tre animal ')
+            chosen_animal = input('Please provide the name of the animal ')
             for exhibit in happy_zoo.list_exhibits:
                 for animal in exhibit.animal_list:
                     if chosen_animal == animal.name:
@@ -153,14 +148,16 @@ while True:
         if user_operation == 'add':
             new_employee = None
             name = input('Please provide the name ')
-            age = input('Please provide the age')
-            position = input('Please choose the position (vet or zookeeper)')
+            age = input('Please provide the age ')
+            position = input('Please choose the position (vet or zookeeper) ')
             if position == 'vet':
                 new_employee = Vet(name,age)
                 happy_zoo.add_staff(new_employee)
+                print('New vet was welcomed to our zoo!')
             elif position == 'zookeeper':
                 new_employee = Zookeeper(name,age)
                 happy_zoo.add_staff(new_employee)
+                print('New zookeeper was welcomed to our zoo!')
             else:
                 print('Invalid input')
         elif user_operation == 'info':
@@ -174,5 +171,5 @@ while True:
         print('Thank you for helping me!')
         break
     else:
-        print('Wrong input. Please provide valid input.')
+        print('\nWrong input. Please provide valid input.\n')
 
