@@ -20,4 +20,4 @@ class Exhibit:
         return self.animal_list
     
     def exhibit_info(self):
-        print(f'Our zoo is located in {self.location}. This is exhibit {self.name}')
+        print(f'This exhibit is located in {self.location}. This is exhibit {self.name}.')
