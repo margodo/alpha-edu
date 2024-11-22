@@ -154,8 +154,4 @@ subtract.grid(column=3,row=4)
 multiply.grid(column=3,row=3)
 divide.grid(column=3,row=2)
 
-
-
-
-
 window.mainloop()
