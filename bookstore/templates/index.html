@@ -5,8 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    <h1 id="Title" style="color: darkgreen; font-family: 'Courier New', Courier, monospace;">Welcome to my book store</h1>
-    <button>View all books</button>
+<body style="background-color: bisque;">
+    <h1 id="Title" style="color: #3630a3; font-family: 'Courier New', Courier, monospace; align-content: center;">Welcome to my book store</h1>
+    <button style="background:#3630a3;color:white; font-weight: 400; white-space: nowrap; padding: 0.375rem; font-size: 1rem; line-height: 1.5; border-radius: 0.5rem;">View all books</button>
+    <table style="width:100%">
+        {% for book in books %}
+        <tr>
+            {% for column in book %}
+          <th>{% print(column) %}</th>
+          {% endfor %}
+        </tr>
+        
+        {% endfor %}
+      </table>
 </body>
 </html>
