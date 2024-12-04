@@ -3,20 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Book Store</title>
+    <script>
+        function submitPutForm(form) {
+            var methodInput = document.createElement('input');
+            methodInput.setAttribute('type', 'hidden');
+            methodInput.setAttribute('name', '_method');
+            methodInput.setAttribute('value', 'PUT');
+            form.appendChild(methodInput);
+            form.submit();
+        }
+    </script>
 </head>
 <body style="background-color: bisque;">
     <h1 id="Title" style="color: #3630a3; font-family: 'Courier New', Courier, monospace; align-content: center;">Welcome to my book store</h1>
-    <button style="background:#3630a3;color:white; font-weight: 400; white-space: nowrap; padding: 0.375rem; font-size: 1rem; line-height: 1.5; border-radius: 0.5rem;">View all books</button>
-    <table style="width:100%">
-        {% for book in books %}
-        <tr>
-            {% for column in book %}
-          <th>{% print(column) %}</th>
-          {% endfor %}
+    <form method="post" style="font-family: 'Times New Roman', Times, serif;" action="{{ url_for('home') }}">
+        <input type="text" placeholder="title" name="title">
+        <input type="text" placeholder="author" name="author">
+        <input type="text" placeholder="year" name="year">
+        <input type="text" placeholder="genre" name="genre">
+        <button type="submit">Search</button>
+    </form>
+    <p></p>
+    <form method="post" onsubmit="event.preventDefault(); submitPutForm(this);" action="{{ url_for('home') }}">
+        <input type="text" placeholder="id" name="id" required>
+        <button type="submit">Buy</button>
+    </form>
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+
+    <p></p>
+
+    <table style="width:100%; font-family: 'Times New Roman', Times, serif, Helvetica, sans-serif; text-align: left;">
+        <tr style="font-size: large; font-weight:bold;">
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Date of Publication</th>
+            <th>Genre</th>
+            <th>Price (KZT)</th>
+            <th>Pieces Available</th>
         </tr>
-        
-        {% endfor %}
-      </table>
+
+        {% if search_result %}
+            <tr>
+                {% for column in book %}
+                    <td>{{ column }}</td>
+                {% endfor %}
+            </tr>
+        {% else %}
+            {% for book in books %}
+                <tr>
+                    {% for column in book %}
+                        <td>{{ column }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </table>
+
+    <p></p>
+    <form method="get" action="{{ url_for('home') }}">
+        <button style="background:#3630a3;color:white; font-weight: 400; white-space: nowrap; padding: 0.375rem; font-size: 1rem; line-height: 1.5; border-radius: 0.5rem;">View all books</button>
+    </form>
 </body>
 </html>
