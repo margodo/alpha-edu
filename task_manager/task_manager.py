@@ -1,13 +1,15 @@
 import sqlite3
 from project import Project
 
-class Task_manager:
-    def __init__(self, name):
-        try:
-            self.connection = sqlite3.connect(name)
-            self.cursor = self.connection.cursor()
-        except sqlite3.Error as error:
-            print(f"Error while connecting: {error}")
+class TaskManager:
+    def __init__(self, db_name):
+        self.db_name = db_name
+        self.connection = sqlite3.connect(self.db_name)
+        self.cursor = self.connection.cursor()
+        # You may want to create a table if it doesn't exist
+        self.cursor.execute('''CREATE TABLE IF NOT EXISTS projects
+                               (name TEXT, deadline TEXT)''')
+        self.connection.commit()
 
     def create_table(self, name, columns):
         try:
@@ -21,3 +23,8 @@ class Task_manager:
             print(f"Table '{name}' was created succesfully!")
         except sqlite3.Error as error:
             print(f"Error while creating a table: {error}")
+
+    def add_project(self, project_name, project_deadline):
+        self.cursor.execute("INSERT INTO projects (name, deadline) VALUES (?, ?)",
+                            (project_name, project_deadline))
+        self.connection.commit()
