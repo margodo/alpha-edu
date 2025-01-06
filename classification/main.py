@@ -22,8 +22,13 @@ def draw_operations(frame, operation):
             cv2.putText(frame, "*", (600, 100), cv2.FONT_HERSHEY_SIMPLEX, 5, (255, 0, 0), 10)
         elif operation == "/":
             cv2.putText(frame, "/", (600, 100), cv2.FONT_HERSHEY_SIMPLEX, 5, (0, 255, 255), 10)
+
 while True:
-    ret, frame = web_camera.read()
+    is_camera_ok, frame = web_camera.read()
+
+    if not is_camera_ok:
+        print('CAMERA IS NOT WORKING')
+
     frame = cv2.flip(frame, 1)
 
     hands, frame = detector.findHands(frame)
