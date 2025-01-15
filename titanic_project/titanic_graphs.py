@@ -11,6 +11,7 @@ class GraphBuilder:
         data = pd.read_csv(self.file_path)
         survival_by_gender = data.groupby("Sex")["Survived"].mean()
         survival_by_gender = survival_by_gender.reindex(['female', 'male'])
+        
         plt.figure(figsize=(10, 6))
         plt.bar(survival_by_gender.index, survival_by_gender.values, color=['blue', 'pink'])
         plt.title("Survival Rate by Gender")
@@ -32,7 +33,6 @@ class GraphBuilder:
         plt.show()
 
     def survival_rate_by_class(self):
-
         data = pd.read_csv(self.file_path)
         survival_by_class = data.groupby("Pclass")["Survived"].mean()
 
@@ -46,7 +46,6 @@ class GraphBuilder:
         plt.show()
 
     def fare_by_class(self):
-
         data = pd.read_csv(self.file_path)
         fare_by_class = data.groupby("Pclass")["Fare"].mean()
 
@@ -58,7 +57,6 @@ class GraphBuilder:
         plt.show()
 
     def survival_by_age_group(self):
-
         data = pd.read_csv(self.file_path)
         data['AgeGroup'] = pd.cut(data['Age'], bins=[0, 18, 35, 50, 80], labels=['Child', 'Young Adult', 'Middle Age', 'Senior'])
         survival_by_age_group = data.groupby("AgeGroup")["Survived"].mean()
@@ -72,7 +70,6 @@ class GraphBuilder:
         plt.show()
 
     def survival_heatmap(self):
-
         data = pd.read_csv(self.file_path)
         heatmap_data = data.pivot_table(index='Pclass', columns='Sex', values='Survived', aggfunc='mean')
 
@@ -84,7 +81,6 @@ class GraphBuilder:
         plt.show()
 
     def class_gender_survival_countplot(self):
-
         data = pd.read_csv(self.file_path)
 
         plt.figure(figsize=(12, 6))
