@@ -24,9 +24,9 @@ class CodeOptimizer:
         pr = cProfile.Profile()
         pr.enable()
         func()
-        pr.disable
+        pr.disable()
 
-        s = io.StringIO
+        s = io.StringIO()
         ps = pstats.Stats(pr, stream=s).sort_stats('cumulative')
         ps.print_stats(10)
         print(s.getvalue())
@@ -40,16 +40,16 @@ class CodeOptimizer:
             {'name': 'David', 'salary': 95000},
         ]
         start_time = time.time()
-        high_earner = []
+        high_earners = []
         for employee in employees:
             if employee['salary'] > 100000:
-                high_earner.append(employee)
+                high_earners.append(employee)
         end_time = time.time()
-        print('Slow result:', high_earner, 'Time ', end_time - start_time)
+        print('Slow result:', high_earners, 'Time ', end_time - start_time)
         start_time = time.time()
-        high_earner = [employee for employee in employees if employee['salary'] > 100000]
+        high_earners = [employee for employee in employees if employee['salary'] > 100000]
         end_time = time.time()
-        print('Optimized result:', high_earner, 'Time ', end_time - start_time)
+        print('Optimized result:', high_earners, 'Time ', end_time - start_time)
         
     def big_o():
         print('\nComparison O(n^2) and O(n):')
@@ -66,11 +66,23 @@ class CodeOptimizer:
         data = list(range(1,1000))
         start_time = time.time()
         quadratic_complexity(data)
-        print()
+        print("Time O(n^2):", time.time() - start_time)
+        start_time = time.time()
+        linear_complexity(data)
+        print("Time O(n):", time.time() - start_time)
     
     def run_class(self):
+        print("\n--- Профилирование неэффективной функции ---")
+        self.profile_function(self.inefficient_function)
+
+        print("\n--- Профилирование оптимизированной функции ---")
+        self.profile_function(self.optimized_function)
+
+        print("\n--- Реальный пример: фильтрация списка сотрудников ---")
         self.real_life_example()
-        self.big_o()
+
+        print("\n--- Сложность алгоритмов и их сравнение ---")
+        self.understanding_big_o()
 
 if __name__ == "__main__":
     lesson = CodeOptimizer()
